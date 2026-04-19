@@ -17,7 +17,7 @@ namespace PathfindingModule
         public int Width => width;
         public int Height => height;
 
-        void Start()
+        void Awake()   // было void Start()
         {
             GenerateGrid();
         }
