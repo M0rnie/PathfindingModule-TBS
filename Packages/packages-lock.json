@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.m0rnie.pathfinding": {
+      "version": "file:com.m0rnie.pathfinding",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

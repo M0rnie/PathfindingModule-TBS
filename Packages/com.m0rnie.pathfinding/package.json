@@ -1,0 +1,11 @@
+{
+  "name": "com.m0rnie.pathfinding",
+  "version": "0.1.0",
+  "displayName": "PathfindingModule-TBS",
+  "description": "Переиспользуемый модуль поиска пути для пошаговых стратегий на Unity.",
+  "unity": "2022.3",
+  "author": {
+    "name": "M0rnie",
+    "email": "avanothermail@gmail.com"
+  }
+}
