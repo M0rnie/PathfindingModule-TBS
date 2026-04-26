@@ -16,6 +16,10 @@ namespace PathfindingModule
 
         public List<GridCell> FindPath(int startX, int startY, int targetX, int targetY)
         {
+            // Проверяем, что старт и цель проходимы
+            if (!grid.IsCellWalkable(startX, startY) || !grid.IsCellWalkable(targetX, targetY))
+                return new List<GridCell>();
+
             var cameFrom = new Dictionary<(int x, int y), (int x, int y)>();
             var costSoFar = new Dictionary<(int x, int y), float>();
             var frontier = new PriorityQueue<(int x, int y)>();
@@ -66,18 +70,18 @@ namespace PathfindingModule
         private IEnumerable<(int x, int y)> GetNeighbors(int x, int y)
         {
             // 4 направления
-            if (x > 0) yield return (x - 1, y);
-            if (x < grid.Width - 1) yield return (x + 1, y);
-            if (y > 0) yield return (x, y - 1);
-            if (y < grid.Height - 1) yield return (x, y + 1);
+            if (x > 0 && grid.IsCellWalkable(x - 1, y)) yield return (x - 1, y);
+            if (x < grid.Width - 1 && grid.IsCellWalkable(x + 1, y)) yield return (x + 1, y);
+            if (y > 0 && grid.IsCellWalkable(x, y - 1)) yield return (x, y - 1);
+            if (y < grid.Height - 1 && grid.IsCellWalkable(x, y + 1)) yield return (x, y + 1);
 
-            // диагонали (если включены)
+            // диагонали (если разрешены)
             if (allowDiagonal)
             {
-                if (x > 0 && y > 0) yield return (x - 1, y - 1);
-                if (x > 0 && y < grid.Height - 1) yield return (x - 1, y + 1);
-                if (x < grid.Width - 1 && y > 0) yield return (x + 1, y - 1);
-                if (x < grid.Width - 1 && y < grid.Height - 1) yield return (x + 1, y + 1);
+                if (x > 0 && y > 0 && grid.IsCellWalkable(x - 1, y - 1)) yield return (x - 1, y - 1);
+                if (x > 0 && y < grid.Height - 1 && grid.IsCellWalkable(x - 1, y + 1)) yield return (x - 1, y + 1);
+                if (x < grid.Width - 1 && y > 0 && grid.IsCellWalkable(x + 1, y - 1)) yield return (x + 1, y - 1);
+                if (x < grid.Width - 1 && y < grid.Height - 1 && grid.IsCellWalkable(x + 1, y + 1)) yield return (x + 1, y + 1);
             }
         }
 
